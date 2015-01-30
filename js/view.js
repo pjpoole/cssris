@@ -5,11 +5,10 @@ if (typeof CSSris === "undefined") {
 
 // The view handles user interaction and screen updates.
 var View = CSSris.View = function (options) {
-  console.log(options)
   this.$el = options.$el;
   this.tick = options.tick || 10; // game clock tick in ms
   this.level = options.level || 1;
-  this.tickCounter = (25 - this.level);
+  this.tickCounter = 1;
 
   this.board = new CSSris.Board();
 
@@ -24,12 +23,21 @@ var View = CSSris.View = function (options) {
 View.prototype.step = function () {
   if (--this.tickCounter === 0) {
     this.board.step();
+    this.tickCounter = (25 - this.level);
   }
   this.render();
 };
 
 View.prototype.render = function () {
+  var view = this;
 
+  this.$el.find('ul').each(function (y) {
+    $(this).find('li').each(function (x) {
+      var $li = $(this);
+      $li.removeClass();
+      $li.addClass(view.board.get(x,y));
+    });
+  });
 };
 
 View.prototype.build = function () {
@@ -41,6 +49,7 @@ View.prototype.build = function () {
       $li = $('<li>');
       $ul.append($li);
     }
+    if (y < 2) $ul.addClass('buffer');
     this.$el.append($ul);
   }
 };

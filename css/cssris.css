@@ -26,17 +26,21 @@ ul {
   box-sizing: border-box;
 }
 
+.buffer {
+  display: none;
+}
+
 li {
   display: block;
   float: left;
   width: 10%;
-  height: auto;
+  height: 100%;
 }
 
-.O { color: yellow; }
-.I { color: red; }
-.S { color: purple; }
-.Z { color: green; }
-.L { color: orange; }
-.J { color: blue; }
-.T { color: lightblue; }
+.O { background: yellow; }
+.I { background: red; }
+.S { background: purple; }
+.Z { background: green; }
+.L { background: orange; }
+.J { background: blue; }
+.T { background: lightblue; }

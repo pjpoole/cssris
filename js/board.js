@@ -19,7 +19,7 @@ var Board = CSSris.Board = function () {
 
 // Standard Tetris board size
 Board.X_DIM = 10;
-Board.Y_DIM = 20;
+Board.Y_DIM = 22;
 
 Board.prototype.step = function () {
   this.piece.step();
@@ -70,7 +70,7 @@ Board.prototype.isValid = function (x, y) {
 };
 
 Board.prototype.inbounds = function (x, y) {
-  return ((x > 0 && x < Board.X_DIM) && (y > 0 && y < Board.Y_DIM));
+  return ((x >= 0 && x < Board.X_DIM) && (y >= 0 && y < Board.Y_DIM));
 };
 
 Board.prototype.grid = function () {
