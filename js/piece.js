@@ -87,16 +87,27 @@ Piece.prototype.randomPiece = function () {
 
 Piece.prototype.step = function () {
   this.drop();
+
+};
+
+Piece.prototype.update = function (callback) {
+  this.drawPiece(false);
+  callback();
+  this.drawPiece(true);
+};
+
+Piece.prototype.drawPiece = function (draw) {
+  var drawObj = draw ? this._piece.name : false
+  var callback = function (offs) {
+    this.board.set(this.pos[0] + offs[0], this.pos[1] + offs[1], drawObj);
+  };
+  this.currentPiece(callback);
 };
 
 Piece.prototype.stop = function () {
   if (this.pos[1] === 0 || this.pos[1] === 1) {
     this.board.gameOver();
   } else {
-    var callback = function (offs) {
-      this.board.set(this.pos[0] + offs[0], this.pos[1] + offs[1], false);
-    };
-    this.currentPiece(callback);
     this.board.stop();
     this.reset();
   }
@@ -111,7 +122,9 @@ Piece.prototype.rotate = function (dir) {
       });
 
   if (this.testPos(tempPiece)) {
-    this.offset = idx;
+    this.update(function () {
+      this.offset = idx;
+    }.bind(this));
   }
 
 };
@@ -124,7 +137,9 @@ Piece.prototype.move = function (dir) {
       tempPiece = this.currentPiece(callback);
 
   if (this.testPos(tempPiece)) {
-    this.pos[0] += offset;
+    this.update(function () {
+      this.pos[0] += offset;
+    }.bind(this));
   }
 };
 
@@ -136,7 +151,9 @@ Piece.prototype.drop = function () {
       tempPiece = this.currentPiece(callback);
 
   if (this.testPos(tempPiece)) {
-    this.pos = newPos;
+    this.update(function () {
+      this.pos = newPos;
+    }.bind(this));
   } else {
     this.stop();
   }
@@ -144,7 +161,7 @@ Piece.prototype.drop = function () {
 
 Piece.prototype.testPos = function (pos_ary) {
   return pos_ary.every(function (offset) {
-    return this.board.get(offset[0], offset[1]);
+    return this.board.isValid(offset[0], offset[1]);
   }, this);
 };
 

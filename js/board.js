@@ -46,7 +46,7 @@ Board.prototype.clearBoard = function () {
 
   for (x = 0; x < Board.X_DIM; x++) {
     for (y = 0; y < Board.Y_DIM; y++) {
-      this.set(x, y, true);
+      this.set(x, y, false);
     }
   }
 };
@@ -64,6 +64,10 @@ Board.prototype.set = function (x, y, val) {
     this.grid()[x][y] = val;
   }
 },
+
+Board.prototype.isValid = function (x, y) {
+  return (this.inbounds(x, y) && (this.get(x, y) === false));
+};
 
 Board.prototype.inbounds = function (x, y) {
   return ((x > 0 && x < Board.X_DIM) && (y > 0 && y < Board.Y_DIM));
