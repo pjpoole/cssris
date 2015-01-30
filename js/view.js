@@ -58,7 +58,11 @@ View.prototype.bindListener = function () {
   var piece = this.board.piece;
 
   $(document).on('keydown', function (key) {
-    // key.preventDefault();
+    var keyCode = key.which;
+
+    if(keyCode >= 37 && keyCode <= 40) {
+      key.preventDefault();
+    }
 
     switch (key.which) {
     case 37:
