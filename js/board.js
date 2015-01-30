@@ -31,21 +31,21 @@ Board.prototype.clearBoard = function () {
 
   for (x = 0; x < Board.X_DIM; x++) {
     for (y = 0; y < Board.Y_DIM; y++) {
-      this.set([x, y]) = false;
+      this.set(x, y, false);
     }
   }
 };
 
 Board.prototype.get = function (x, y) {
   if (this.inbounds(x, y)) {
-    return this._grid[x][y];
+    return this.grid()[x][y];
   }
   return;
 },
 
 Board.prototype.set = function (x, y, val) {
   if (this.inbounds(x, y)) {
-    this._grid[x][y] = val;
+    this.grid()[x][y] = val;
   }
 },
 
@@ -62,6 +62,8 @@ Board.prototype.grid = function () {
       this._grid[x] = new Array(Board.Y_DIM);
     }
   }
+
+  return this._grid;
 };
 
 Board.prototype.render = function () {
