@@ -6,7 +6,9 @@ if (typeof CSSris === "undefined") {
 // The view handles user interaction and screen updates.
 var View = CSSris.View = function (options) {
   this.$el = options.$el;
-  this.tick = options.tick || 100; // game clock tick in ms
+  this.tick = options.tick || 10; // game clock tick in ms
+  this.level = options.level || 1;
+  this.tickCounter = (25 - this.level);
 
   this.board = new CSSris.Board();
 
@@ -19,6 +21,9 @@ var View = CSSris.View = function (options) {
 };
 
 View.prototype.step = function () {
+  if (--this.tickCounter === 0) {
+    this.board.step();
+  }
   this.render();
 };
 

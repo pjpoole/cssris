@@ -85,6 +85,21 @@ Piece.prototype.randomPiece = function () {
   return Piece.pieces[Math.floor(Math.random() * 6)];
 };
 
+Piece.prototype.step = function () {
+  this.drop();
+};
+
+Piece.prototype.stop = function () {
+  if (this.pos[1] === 0 || this.pos[1] === 1) {
+    // Game over
+  } else {
+    this.currentPiece().forEach(function () {
+
+    })
+    this.reset();
+  }
+};
+
 Piece.prototype.rotate = function (dir) {
   var offset = dir === 'L' ? -1 : 1,
       idx = (this.offset + this._piece.size + offset) % this._piece.size,
@@ -101,10 +116,10 @@ Piece.prototype.rotate = function (dir) {
 
 Piece.prototype.move = function (dir) {
   var offset = dir === 'L' ? -1 : 1,
-      pos = this.pos,
-      tempPiece = this._piece.offsets(this.offset).map(function (offs) {
-        return [pos[0] + offset, pos[1]];
-      });
+      callback = function (offs) {
+        return [this.pos[0] + offset, this.pos[1]];
+      },
+      tempPiece = this.currentPiece(callback);
 
   if (this.testPos(tempPiece)) {
     this.pos[0] += offset;
@@ -113,13 +128,15 @@ Piece.prototype.move = function (dir) {
 
 Piece.prototype.drop = function () {
   var newPos = [this.pos[0], this.pos[1] + 1],
-      pos = this.pos,
-      tempPiece = this._piece.offsets(this.offset).map(function (offs) {
-        return [pos[0], pos[1] + 1];
-      });
+      callback = function (offs) {
+        return [this.pos[0], pos[1] + 1];
+      },
+      tempPiece = this.currentPiece(callback);
 
   if (this.testPos(tempPiece)) {
     this.pos = newPos;
+  } else {
+    this.stop();
   }
 };
 
@@ -127,6 +144,14 @@ Piece.prototype.testPos = function (pos_ary) {
   return pos_ary.every(function (offset) {
     return !this.board.get(offset[0], offset[1]);
   }, this);
+};
+
+Piece.prototype.currentPiece = function (callback) {
+  callback = callback || function (offs) {
+    return [this.pos[0] + offs[0], this.pos[1] + offs[1]];
+  };
+
+  return this._piece.offsets[this.offset].map(callback, this);
 };
 
 Piece.prototype.reset = function () {

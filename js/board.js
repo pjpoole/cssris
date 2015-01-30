@@ -6,7 +6,10 @@ if (typeof CSSris === "undefined") {
 // This is where the logic for the game gets stored and interpreted.
 var Board = CSSris.Board = function () {
   // TODO: save highscore
+
   this.clearBoard();
+
+  this.piece = new CSSris.Piece(this);
 
   this.highscore = 0;
   this.points = 0;
@@ -17,6 +20,10 @@ var Board = CSSris.Board = function () {
 // Standard Tetris board size
 Board.X_DIM = 10;
 Board.Y_DIM = 20;
+
+Board.prototype.step = function () {
+  this.piece.step();
+};
 
 Board.prototype.die = function () {
   this.highscore = Math.max(this.points, this.highscore);
@@ -89,4 +96,4 @@ Board.prototype.render = function () {
 };
 
 
-});
+})();
