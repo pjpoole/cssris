@@ -66,7 +66,7 @@ Board.prototype.set = function (x, y, val) {
 },
 
 Board.prototype.isValid = function (x, y) {
-  return (this.inbounds(x, y) && (this.get(x, y) === false));
+  return (!this.get(x, y));
 };
 
 Board.prototype.inbounds = function (x, y) {
