@@ -112,7 +112,15 @@ Piece.prototype.move = function (dir) {
 };
 
 Piece.prototype.drop = function () {
+  var newPos = [this.pos[0], this.pos[1] + 1],
+      pos = this.pos,
+      tempPiece = this._piece.offsets(this.offset).map(function (offs) {
+        return [pos[0], pos[1] + 1];
+      });
 
+  if (this.testPos(tempPiece)) {
+    this.pos = newPos;
+  }
 };
 
 Piece.prototype.testPos = function (pos_ary) {
