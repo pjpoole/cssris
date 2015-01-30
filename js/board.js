@@ -39,8 +39,9 @@ Board.prototype.clearBoard = function () {
 Board.prototype.get = function (x, y) {
   if (this.inbounds(x, y)) {
     return this.grid()[x][y];
+  } else {
+    return undefined;
   }
-  return;
 },
 
 Board.prototype.set = function (x, y, val) {
