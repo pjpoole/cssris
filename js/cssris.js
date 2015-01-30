@@ -1,4 +1,4 @@
-// Just a launcher. 
+// Just a launcher.
 $(function () {
-  var view = new CSSris.View({ el: $('#gameboard') });
+  var view = new CSSris.View({ $el: $('#gameboard') });
 });

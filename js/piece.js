@@ -87,7 +87,6 @@ Piece.prototype.randomPiece = function () {
 
 Piece.prototype.step = function () {
   this.drop();
-
 };
 
 Piece.prototype.update = function (callback) {

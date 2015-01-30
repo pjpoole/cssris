@@ -9,13 +9,15 @@ div, ul, li
 }
 
 body {
-
+  background: black;
 }
 
 /* Hard-coding width and height because I'm lazy */
 #gameboard {
   width: 250px;
   height: 500px;
+  margin: 50px auto;
+  background: white;
 }
 
 ul {
