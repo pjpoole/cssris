@@ -5,7 +5,7 @@ if (typeof CSSris === "undefined") {
 
 var Piece = CSSris.Piece = function (board) {
   this.board = board;
-  this.pos = [6,0];
+  this.pos = [5,0];
   this._piece = this.randomPiece();
 };
 
@@ -94,8 +94,8 @@ Piece.prototype.stop = function () {
     this.board.gameOver();
   } else {
     var callback = function (offs) {
-      this.board.set(offs[0], offs[1], true);
-    });
+      this.board.set(this.pos[0] + offs[0], this.pos[1] + offs[1], false);
+    };
     this.currentPiece(callback);
     this.board.stop();
     this.reset();
@@ -144,7 +144,7 @@ Piece.prototype.drop = function () {
 
 Piece.prototype.testPos = function (pos_ary) {
   return pos_ary.every(function (offset) {
-    return !this.board.get(offset[0], offset[1]);
+    return this.board.get(offset[0], offset[1]);
   }, this);
 };
 

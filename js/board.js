@@ -30,7 +30,7 @@ Board.prototype.stop = function () {
 };
 
 Board.prototype.gameOver = function () {
-  
+
 };
 
 Board.prototype.die = function () {
@@ -46,7 +46,7 @@ Board.prototype.clearBoard = function () {
 
   for (x = 0; x < Board.X_DIM; x++) {
     for (y = 0; y < Board.Y_DIM; y++) {
-      this.set(x, y, false);
+      this.set(x, y, true);
     }
   }
 };
