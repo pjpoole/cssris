@@ -58,7 +58,7 @@ View.prototype.bindListener = function () {
   var piece = this.board.piece;
 
   $(document).on('keydown', function (key) {
-    key.preventDefault();
+    // key.preventDefault();
 
     switch (key.which) {
     case 37:
