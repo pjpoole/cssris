@@ -25,6 +25,14 @@ Board.prototype.step = function () {
   this.piece.step();
 };
 
+Board.prototype.stop = function () {
+
+};
+
+Board.prototype.gameOver = function () {
+  
+};
+
 Board.prototype.die = function () {
   this.highscore = Math.max(this.points, this.highscore);
   this.points = 0;

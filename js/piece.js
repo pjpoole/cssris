@@ -91,11 +91,13 @@ Piece.prototype.step = function () {
 
 Piece.prototype.stop = function () {
   if (this.pos[1] === 0 || this.pos[1] === 1) {
-    // Game over
+    this.board.gameOver();
   } else {
-    this.currentPiece().forEach(function () {
-
-    })
+    var callback = function (offs) {
+      this.board.set(offs[0], offs[1], true);
+    });
+    this.currentPiece(callback);
+    this.board.stop();
     this.reset();
   }
 };
@@ -129,7 +131,7 @@ Piece.prototype.move = function (dir) {
 Piece.prototype.drop = function () {
   var newPos = [this.pos[0], this.pos[1] + 1],
       callback = function (offs) {
-        return [this.pos[0], pos[1] + 1];
+        return [this.pos[0], this.pos[1] + 1];
       },
       tempPiece = this.currentPiece(callback);
 
