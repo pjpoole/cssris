@@ -15,9 +15,9 @@ var View = CSSris.View = function (options) {
   this.build();
   this.bindListener();
 
-  // setInterval(function () {
-  //   this.step();
-  // }.bind(this), this.tick)
+  setInterval(function () {
+    this.step();
+  }.bind(this), this.tick)
 };
 
 View.prototype.step = function () {

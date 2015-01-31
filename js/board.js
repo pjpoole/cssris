@@ -43,7 +43,7 @@ Board.prototype.stop = function () {
 
 Board.prototype.clearRow = function (y_source) {
   var x, y;
-  for (y = y_source; y >= 0; y--) {
+  for (y = y_source; y >= 1; y--) {
     for (x = 0; x < Board.X_DIM; x++) {
       this.set(x, y, this.get(x, y - 1));
     }
