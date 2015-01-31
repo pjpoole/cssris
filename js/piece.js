@@ -86,7 +86,6 @@ Piece.prototype.randomPiece = function () {
 
 Piece.prototype.step = function () {
   this.drop();
-  console.log(this.pos);
 };
 
 Piece.prototype.update = function (callback) {
@@ -130,10 +129,9 @@ Piece.prototype.rotate = function (dir) {
 };
 
 Piece.prototype.move = function (dir) {
-  console.log(dir)
   var offset = dir === 'L' ? -1 : 1,
       callback = function (offs) {
-        return [this.pos[0] + offset, this.pos[1]];
+        return [this.pos[0] + offs[0] + offset, this.pos[1] + offs[1]];
       },
       tempPiece = this.currentPiece(callback);
 
@@ -154,10 +152,8 @@ Piece.prototype.drop = function () {
   if (this.testPos(tempPiece)) {
     this.update(function () {
       this.pos = newPos;
-      console.log(this.pos)
     }.bind(this));
   } else {
-    console.log('stopped')
     this.stop();
   }
 };
