@@ -104,7 +104,11 @@ View.prototype.bindListener = function () {
     case 37:
       piece.move("L");
       break;
+    case 65:
+      piece.rotate("L");
+      break;
     case 38:
+    case 83:
       piece.rotate("R");
       break;
     case 39:
