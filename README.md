@@ -7,3 +7,18 @@ I wanted to do a quick project from scratch using JavaScript and CSS. At the end
 Default keybindings use the arrow keys to move (and drop); up arrow rotates clockwise.
 
 'a' and 's' rotate counter-clockwise and clockwise, respectively.
+
+## Todo
+
+* Add pause functionality
+* Make game speed ramp up more reasonably and not break completely at level 25
+* Improve game palette
+* Improve piece randomizer to make it less random
+* Styling of game area
+* Game over should pause the game briefly
+* Render next piece more symmetrically
+
+## Future features
+
+* Customize controls
+* Choose starting level
