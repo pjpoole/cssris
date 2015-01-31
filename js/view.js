@@ -6,14 +6,20 @@ if (typeof CSSris === "undefined") {
 // The view handles user interaction and screen updates.
 var View = CSSris.View = function (options) {
   this.$el = options.$el;
-  this.tick = options.tick || 10; // game clock tick in ms
-  this.level = options.level || 1;
-  this.tickCounter = 1;
+  this.$next = $('#next-piece');
 
-  this.board = new CSSris.Board();
+  this.tick = options.tick || 10; // game clock tick in ms
+
+  this.board = new CSSris.Board({
+    level: this.level,
+    view: this
+  });
 
   this.build();
   this.bindListener();
+
+  this.buildTinyBoard();
+  this.update();
 
   setInterval(function () {
     this.step();
@@ -21,11 +27,28 @@ var View = CSSris.View = function (options) {
 };
 
 View.prototype.step = function () {
-  if (--this.tickCounter === 0) {
-    this.board.step();
-    this.tickCounter = (25 - this.level);
-  }
+  this.board.tick();
   this.render();
+};
+
+View.prototype.update = function () {
+  $('#score').text(this.board.points);
+  $('#high-score').text(this.board.highscore);
+  $('#level').text(this.board.level);
+  $('#lines').text(this.board.lines);
+  this.updateNextPiece();
+};
+
+View.prototype.updateNextPiece = function () {
+  var view = this;
+
+  this.$next.find('ul').each(function (y) {
+    $(this).find('li').each(function (x) {
+      var $li = $(this);
+      $li.removeClass();
+      $li.addClass(view.board.nextPiece[x][y]);
+    });
+  });
 };
 
 View.prototype.render = function () {
@@ -38,6 +61,19 @@ View.prototype.render = function () {
       $li.addClass(view.board.get(x,y));
     });
   });
+};
+
+View.prototype.buildTinyBoard = function () {
+  var $ul, $li, x, y;
+
+  for (y = 0; y < 4; y++) {
+    $ul = $('<ul>');
+    for (x = 0; x < 4; x++) {
+      $li = $('<li>');
+      $ul.append($li);
+    }
+    this.$next.append($ul);
+  }
 };
 
 View.prototype.build = function () {

@@ -9,6 +9,38 @@
     <script src="../js/cssris.js"></script>
   </head>
   <body>
-    <div id="gameboard"></div>
+    <header>
+      <h1>CSSris</h1>
+    </header>
+    <section class="sidebar">
+      <div class="next-piece">
+        <figure>
+          <div id="next-piece"></div>
+          <figcaption>Next Piece</figcaption>
+        </figure>
+      </div>
+      <div class="score">
+        <figure>
+          <div id="lines" class="score-info"></div>
+          <figcaption>Lines</figcaption>
+        </figure>
+        <figure>
+          <div id="level" class="score-info"></div>
+          <figcaption>Level</figcaption>
+        </figure>
+        <figure>
+          <div id="score" class="score-info"></div>
+          <figcaption>Score</figcaption>
+        </figure>
+        <figure>
+          <div id="high-score" class="score-info"></div>
+          <figcaption>High Score</figcaption>
+        </figure>
+      </div>
+    </section>
+    <section class="center">
+      <div id="gameboard"></div>
+    </section>
+
   </body>
 </html>

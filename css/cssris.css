@@ -1,28 +1,86 @@
 html, body,
-div, ul, li
+figure, figcaption,
+div, ul, li, h1
 {
   margin: 0;
   padding: 0;
   border: 0;
   box-sizing: inherit;
   background: inherit;
+  font: inherit;
+  color: inherit;
+  text-align: inherit;
 }
 
 body {
   background: black;
+  font-family: sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+  text-align: center;
 }
 
-/* Hard-coding width and height because I'm lazy */
-#gameboard {
+h1 {
+  color: white;
+  font-size: 28px;
+  margin: 20px;
+}
+
+div {
+  background: white;
+  color: black;
+  display: inline-block;
+}
+
+.sidebar {
+  right: calc(50% + 145px);
+  position: relative;
+  float: right;
+  width: 150px;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.center {
+  margin: 0 auto 50px auto;
   width: 250px;
   height: 500px;
-  margin: 50px auto;
-  background: white;
+}
+
+#gameboard {
+  width: 100%;
+  display: block;
+}
+
+.next-piece {
+  width: 108px;
+  margin: 20px auto;
+}
+
+.score {
+  width: 100%;
+  padding: 10px 20px;
+  margin: 20px auto;
+}
+
+figure {
+  padding: 4px;
+}
+
+figure + figure {
+  border-top: 1px solid grey;
+}
+
+.score-info {
+  font-size: 28px;
+  font-family: monospace;
+  text-align: right;
+  width: 100%;
 }
 
 ul {
   width: 100%;
-  height: 5%;
+  height: 25px;
   box-sizing: border-box;
 }
 
@@ -33,7 +91,7 @@ ul {
 li {
   display: block;
   float: left;
-  width: 10%;
+  width: 25px;
   height: 100%;
 }
 

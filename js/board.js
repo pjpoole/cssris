@@ -4,16 +4,24 @@ if (typeof CSSris === "undefined") {
 }
 
 // This is where the logic for the game gets stored and interpreted.
-var Board = CSSris.Board = function () {
+var Board = CSSris.Board = function (options) {
   // TODO: save highscore
 
+  this.view = options.view;
+
   this.clearBoard();
+  this.nextPiece = [[],[],[],[]];
 
   this.piece = new CSSris.Piece(this);
+
+  this.level = options.level || 1;
+  this.tickCounter = 0;
 
   this.highscore = 0;
   this.points = 0;
   this.lines = 0;
+
+  this.updateNextPiece();
 
 };
 
@@ -21,11 +29,20 @@ var Board = CSSris.Board = function () {
 Board.X_DIM = 10;
 Board.Y_DIM = 22;
 
+Board.SCORES = [0, 40, 100, 300, 1200];
+
+Board.prototype.tick = function () {
+  if (this.tickCounter-- === 0) {
+    this.step();
+    this.tickCounter = (40 - 2 * this.level);
+  }
+};
+
 Board.prototype.step = function () {
   this.piece.step();
 };
 
-Board.prototype.stop = function () {
+Board.prototype.stop = function (points) {
   var counter, rows = 0, x, y;
   for (y = 0; y < Board.Y_DIM; y++) {
     counter = 0;
@@ -39,6 +56,12 @@ Board.prototype.stop = function () {
       rows++;
     }
   }
+  this.lines += rows;
+  this.level = Math.floor(this.lines / 10) + 1;
+  this.points += this.level * Board.SCORES[rows] + points;
+  this.updateNextPiece();
+
+  this.view.update();
 };
 
 Board.prototype.clearRow = function (y_source) {
@@ -66,6 +89,20 @@ Board.prototype.clearBoard = function () {
       this.set(x, y, false);
     }
   }
+};
+
+Board.prototype.updateNextPiece = function () {
+  var x, y, piece = this.piece.nextPiece;
+
+  for (y = 0; y < 4; y++) {
+    for (x = 0; x < 4; x++) {
+      this.nextPiece[x][y] = false;
+    }
+  }
+
+  piece.offsets[0].forEach(function (offs) {
+    this.nextPiece[offs[0] + 2][offs[1] + 1] = piece.name;
+  }, this);
 };
 
 Board.prototype.get = function (x, y) {

@@ -87,6 +87,7 @@ Piece.prototype.randomPiece = function () {
 };
 
 Piece.prototype.step = function () {
+  this.points -= 1;
   this.drop();
 };
 
@@ -108,8 +109,9 @@ Piece.prototype.stop = function () {
   if (this.pos[1] === 0 || this.pos[1] === 1) {
     this.board.gameOver();
   } else {
-    this.board.stop();
+    var points = this.points;
     this.reset();
+    this.board.stop(points);
   }
 };
 
@@ -150,6 +152,8 @@ Piece.prototype.drop = function () {
       },
       tempPiece = this.currentPiece(callback);
 
+  this.points += 1;
+
   if (this.testPos(tempPiece)) {
     this.update(function () {
       this.pos = newPos;
@@ -180,5 +184,6 @@ Piece.prototype.reset = function () {
   this.pos = [5, 0];
   this._piece = this.nextPiece;
   this.nextPiece = this.randomPiece();
+  this.points = 0;
 };
 })();
