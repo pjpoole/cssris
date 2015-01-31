@@ -79,6 +79,7 @@ Board.prototype.gameOver = function () {
   this.lines = 0;
 
   this.clearBoard();
+  this.view.update();
 };
 
 Board.prototype.clearBoard = function () {
