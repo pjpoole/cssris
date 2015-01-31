@@ -30,10 +30,6 @@ Board.prototype.stop = function () {
 };
 
 Board.prototype.gameOver = function () {
-
-};
-
-Board.prototype.die = function () {
   this.highscore = Math.max(this.points, this.highscore);
   this.points = 0;
   this.lines = 0;
@@ -55,7 +51,7 @@ Board.prototype.get = function (x, y) {
   if (this.inbounds(x, y)) {
     return this.grid()[x][y];
   } else {
-    return undefined;
+    return true;
   }
 },
 
@@ -96,7 +92,7 @@ Board.prototype.render = function () {
       val = this.get(x, y);
 
       if (val) {
-        str += "+";
+        str += "val";
       } else {
         str += " ";
       }
