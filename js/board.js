@@ -26,7 +26,28 @@ Board.prototype.step = function () {
 };
 
 Board.prototype.stop = function () {
+  var counter, rows = 0, x, y;
+  for (y = 0; y < Board.Y_DIM; y++) {
+    counter = 0;
+    for (x = 0; x < Board.X_DIM; x++) {
+      if (this.get(x, y)) {
+        counter++;
+      }
+    }
+    if (counter === Board.X_DIM) {
+      this.clearRow(y);
+      rows++;
+    }
+  }
+};
 
+Board.prototype.clearRow = function (y_source) {
+  var x, y;
+  for (y = y_source; y >= 0; y--) {
+    for (x = 0; x < Board.X_DIM; x++) {
+      this.set(x, y, this.get(x, y - 1));
+    }
+  }
 };
 
 Board.prototype.gameOver = function () {
