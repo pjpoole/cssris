@@ -32,9 +32,9 @@ Board.Y_DIM = 22;
 Board.SCORES = [0, 40, 100, 300, 1200];
 
 Board.prototype.tick = function () {
-  if (this.tickCounter-- === 0) {
+  if (this.tickCounter-- <= 0) {
     this.step();
-    this.tickCounter = (40 - 2 * this.level);
+    this.tickCounter = Math.max((40 - 2 * this.level), 1);
   }
 };
 
