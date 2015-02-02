@@ -101,20 +101,23 @@ View.prototype.bindListener = function () {
     }
 
     switch (key.which) {
-    case 37:
+    case 27: // esc
+      that.pause();
+      break;
+    case 37: // Left
       piece.move("L");
       break;
-    case 65:
+    case 65: // 'a'
       piece.rotate("L");
       break;
-    case 38:
-    case 83:
+    case 38: // Up
+    case 83: // 's'
       piece.rotate("R");
       break;
-    case 39:
+    case 39: // Right
       piece.move("R");
       break;
-    case 40:
+    case 40: // Down
       piece.drop();
       break;
     default:
