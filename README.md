@@ -9,9 +9,6 @@ Default keybindings use the arrow keys to move (and drop); up arrow rotates cloc
 'a' and 's' rotate counter-clockwise and clockwise, respectively.
 
 ## Todo
-
-* Add pause functionality
-* Make game speed ramp up more reasonably and not break completely at level 25
 * Improve game palette
 * Improve piece randomizer to make it less random
 * Styling of game area
