@@ -9,6 +9,7 @@ var View = CSSris.View = function (options) {
   this.$next = $('#next-piece');
 
   this.tick = options.tick || 10; // game clock tick in ms
+  this.paused = false;
 
   this.board = new CSSris.Board({
     level: this.level,
@@ -22,8 +23,19 @@ var View = CSSris.View = function (options) {
   this.update();
 
   setInterval(function () {
-    this.step();
+    if (!this.paused) {
+      this.step();
+    }
   }.bind(this), this.tick)
+};
+
+View.prototype.pause = function () {
+  this.paused = !(this.paused);
+  if (this.paused) {
+    $('body').prepend('<div id="paused"><div class="text">PAUSED</div></div>');
+  } else {
+    $('#paused').remove();
+  }
 };
 
 View.prototype.step = function () {
@@ -91,7 +103,7 @@ View.prototype.build = function () {
 };
 
 View.prototype.bindListener = function () {
-  var piece = this.board.piece;
+  var piece = this.board.piece, that = this;
 
   $(document).on('keydown', function (key) {
     var keyCode = key.which;
