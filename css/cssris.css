@@ -54,11 +54,33 @@ div {
 
 .sidebar {
   right: calc(50% + 145px);
-  position: relative;
+  position: absolute;
   float: right;
   width: 150px;
   height: 100%;
   box-sizing: border-box;
+}
+
+.sidebar-right {
+  left: calc(50% + 145px);
+  position: absolute;
+  float: left;
+  width: 150px;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.larger {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.list {
+  width: 100%;
+}
+
+.list li {
+  width: 100%;
 }
 
 .center {
