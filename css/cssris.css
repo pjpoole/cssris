@@ -1,3 +1,5 @@
+/*** RESET ***/
+
 html, body,
 figure, figcaption,
 div, ul, li, h1
@@ -11,6 +13,8 @@ div, ul, li, h1
   color: inherit;
   text-align: inherit;
 }
+
+/*** GLOBALS ***/
 
 body {
   background: black;
@@ -32,6 +36,8 @@ div {
   display: inline-block;
 }
 
+/*** PAUSE OVERLAY ***/
+
 #paused {
   top: 0;
   left: 0;
@@ -52,28 +58,36 @@ div {
   top: 50%;
 }
 
+/*** COLUMNS ***/
+
 .sidebar {
-  right: calc(50% + 145px);
   position: absolute;
-  float: right;
-  width: 150px;
+  width: 165px;
   height: 100%;
   box-sizing: border-box;
+}
+
+.center {
+  margin: 0 auto 50px auto;
+  width: 250px;
+  height: 500px;
+}
+
+.sidebar-left {
+  right: calc(50% + 145px);
 }
 
 .sidebar-right {
   left: calc(50% + 145px);
-  position: absolute;
-  float: left;
-  width: 150px;
-  height: 100%;
-  box-sizing: border-box;
 }
 
-.larger {
-  font-size: 18px;
-  margin-bottom: 10px;
+.info {
+  border-radius: 5px;
+  border: 3px solid grey;
+  padding: 5px;
 }
+
+/*** RIGHT SIDE TWEAKS ***/
 
 .list {
   width: 100%;
@@ -83,19 +97,10 @@ div {
   width: 100%;
 }
 
-.center {
-  margin: 0 auto 50px auto;
-  width: 250px;
-  height: 500px;
-}
-
-#gameboard {
-  width: 100%;
-  display: block;
-}
+/*** LEFT SIDE TWEAKS ***/
 
 .next-piece {
-  width: 108px;
+  width: 124px;
   margin: 20px auto;
 }
 
@@ -103,6 +108,13 @@ div {
   width: 100%;
   padding: 10px 20px;
   margin: 20px auto;
+}
+
+.score-info {
+  font-size: 28px;
+  font-family: monospace;
+  text-align: right;
+  width: 100%;
 }
 
 figure {
@@ -113,12 +125,19 @@ figure + figure {
   border-top: 1px solid grey;
 }
 
-.score-info {
-  font-size: 28px;
-  font-family: monospace;
-  text-align: right;
-  width: 100%;
+.larger {
+  font-size: 18px;
+  margin: 10px;
 }
+
+/*** GAMEBOARD/CENTER TWEAKS ***/
+
+#gameboard {
+  width: 100%;
+  display: block;
+}
+
+/*** GAMEBOARD ***/
 
 ul {
   width: 100%;
